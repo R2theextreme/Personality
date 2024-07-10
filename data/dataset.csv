@@ -1,0 +1,19 @@
+code_snippet,personality
+def add(a, b): return a + b,Type A
+print('Hello, World!'),Type B
+def subtract(a, b): return a - b,Type A
+print('Goodbye, World!'),Type B
+for i in range(10): print(i),Type A
+if a > b: print(a),Type B
+while True: break,Type A
+import numpy as np,Type B
+def multiply(a, b): return a * b,Type A
+print('End of program'),Type B
+def divide(a, b): return a / b,Type A
+print('Hello again!'),Type B
+import pandas as pd,Type B
+while i < 10: i += 1,Type A
+print('Done!'),Type B
+def greet(name): return f'Hello, {name}!',Type B
+try: x = int(input()),Type A
+except ValueError: print('Invalid'),Type B

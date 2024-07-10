@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personality Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('find_language') }}">Find Language Based on Personality</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <video autoplay loop muted>
+            <source src="{{ url_for('static', filename='videos/your-animation.mp4') }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div class="quotes">
+            <em>"Explore Your Coding Style's Personality Insights."</em><br>
+            <em>"Unlock Your Potential with Data-Driven Analysis."</em><br>
+            <em>"Discover How Your Code Reflects Who You Are."</em>
+        </div>
+        <h1>Predict Your Personality Based on Coding Style</h1>
+        <form action="{{ url_for('index') }}" method="post">
+            <textarea id="codeSnippet" name="code_snippet" placeholder="Enter your code snippet here..."></textarea>
+            <select name="language">
+                <option value="Python">Python</option>
+            </select>
+            <button id="predictButton" type="submit">Predict Personality</button>
+        </form>
+        {% if error_message %}
+        <p class="error">{{ error_message }}</p>
+        {% endif %}
+        {% if prediction %}
+        <h2>Prediction Result</h2>
+        <p>Your code snippet: {{ code_snippet }}</p>
+        <p>Predicted personality: {{ prediction }}</p>
+        {% endif %}
+    </div>
+    <!-- Include your custom script -->
+    <script src="{{ url_for('static', filename='scripts/main.js') }}"></script>
+</body>
+</html>
