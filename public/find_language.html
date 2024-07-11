@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Language Based on Personality</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            let selectedTags = [];
+            const maxTags = 10;
+            const tagButtons = document.querySelectorAll('.tag-button');
+
+            tagButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    if (selectedTags.includes(button.dataset.value)) {
+                        button.classList.remove('selected');
+                        selectedTags = selectedTags.filter(tag => tag !== button.dataset.value);
+                    } else if (selectedTags.length < maxTags) {
+                        button.classList.add('selected');
+                        selectedTags.push(button.dataset.value);
+                    } else {
+                        document.getElementById('outputMessage').innerText = `Please select exactly ${maxTags} tags to get recommendations.`;
+                    }
+                });
+            });
+
+            document.getElementById('languageForm').addEventListener('submit', (e) => {
+                if (selectedTags.length !== maxTags) {
+                    e.preventDefault();
+                    document.getElementById('outputMessage').innerText = `Please select exactly ${maxTags} tags to get recommendations.`;
+                } else {
+                    document.getElementById('selectedTags').value = JSON.stringify(selectedTags);
+                }
+            });
+        });
+    </script>
+    <style>
+        .tag-button.selected {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{{ url_for('index') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('find_language') }}">Find Language Based on Personality</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Find Language Based on Personality</h1>
+        <h3>Please pick exactly 10 things in total</h3>
+        <form id="languageForm" method="post" action="{{ url_for('find_language') }}">
+            <div>
+                <h3>Pick some words that describe you</h3>
+                <div class="tags">
+                    <button type="button" class="tag-button" data-value="Adventurous">Adventurous</button>
+                    <button type="button" class="tag-button" data-value="Artistic">Artistic</button>
+                    <button type="button" class="tag-button" data-value="Creative">Creative</button>
+                    <button type="button" class="tag-button" data-value="Introverted">Introverted</button>
+                    <button type="button" class="tag-button" data-value="Extroverted">Extroverted</button>
+                    <button type="button" class="tag-button" data-value="Practical">Practical</button>
+                    <button type="button" class="tag-button" data-value="Analytical">Analytical</button>
+                    <button type="button" class="tag-button" data-value="Patient">Patient</button>
+                    <button type="button" class="tag-button" data-value="Empathetic">Empathetic</button>
+                    <button type="button" class="tag-button" data-value="Leader">Leader</button>
+                    <button type="button" class="tag-button" data-value="Innovative">Innovative</button>
+                    <button type="button" class="tag-button" data-value="Detail-Oriented">Detail-Oriented</button>
+                    <button type="button" class="tag-button" data-value="Organized">Organized</button>
+                    <button type="button" class="tag-button" data-value="Spontaneous">Spontaneous</button>
+                    <button type="button" class="tag-button" data-value="Team Player">Team Player</button>
+                    <button type="button" class="tag-button" data-value="Independent">Independent</button>
+                    <button type="button" class="tag-button" data-value="Curious">Curious</button>
+                    <button type="button" class="tag-button" data-value="Logical">Logical</button>
+                    <button type="button" class="tag-button" data-value="Good with People">Good with People</button>
+                    <button type="button" class="tag-button" data-value="Wealth-Oriented">Wealth-Oriented</button>
+                </div>
+            </div>
+            <div>
+                <h3>Pick some topics that you are interested in</h3>
+                <div class="tags">
+                    <button type="button" class="tag-button" data-value="Science">Science</button>
+                    <button type="button" class="tag-button" data-value="History">History</button>
+                    <button type="button" class="tag-button" data-value="People">People</button>
+                    <button type="button" class="tag-button" data-value="Engineering">Artificial intelligence</button>
+                    <button type="button" class="tag-button" data-value="Art">Art</button>
+                    <button type="button" class="tag-button" data-value="Maths">Maths</button>
+                    <button type="button" class="tag-button" data-value="Technology and Electronics">Electronics</button>
+                    <button type="button" class="tag-button" data-value="Humanities">Humanities</button>
+                    <button type="button" class="tag-button" data-value="Animals">Animals</button>
+                    <button type="button" class="tag-button" data-value="Accounting">Accounting</button>
+                    <button type="button" class="tag-button" data-value="Medicine">Medicine</button>
+                    <button type="button" class="tag-button" data-value="Architecture and Building">Architecture</button>
+                    <button type="button" class="tag-button" data-value="Languages">Languages</button>
+                    <button type="button" class="tag-button" data-value="Design">Design</button>
+                    <button type="button" class="tag-button" data-value="Marketing">Marketing</button>
+                    <button type="button" class="tag-button" data-value="Economics and Finance">Economics and Finance</button>
+                    <button type="button" class="tag-button" data-value="Health Sciences">bioinformatics</button>
+                    <button type="button" class="tag-button" data-value="Hospitality and Tourism">Hospitality and Tourism</button>
+                    <button type="button" class="tag-button" data-value="International Relations">International Relations</button>
+                    <button type="button" class="tag-button" data-value="Law and Criminology">Law and Criminology</button>
+                    <button type="button" class="tag-button" data-value="Marine Environment">Marine Environment</button>
+                    <button type="button" class="tag-button" data-value="Social Work">Social Work</button>
+                    <button type="button" class="tag-button" data-value="Profession">Profession</button>
+                    <button type="button" class="tag-button" data-value="Agriculture">Agriculture</button>
+                    <button type="button" class="tag-button" data-value="Chemistry">Chemistry</button>
+                    <button type="button" class="tag-button" data-value="Politics">Politics</button>
+                    <button type="button" class="tag-button" data-value="Management">Management</button>
+                    <button type="button" class="tag-button" data-value="Music">Music</button>
+                </div>
+            </div>
+            <input type="hidden" name="selectedTags" id="selectedTags">
+            <button type="submit">Find Languages</button>
+        </form>
+        <div id="outputMessage">
+            {% if message %}
+                <p>{{ message }}</p>
+            {% endif %}
+            {% if languages %}
+                <h2>Recommended Programming Languages</h2>
+                <ul>
+                    {% for language in languages %}
+                        <li>{{ language }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
