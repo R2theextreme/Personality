@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "codeaura-cbfbe"
-  }
+    "default": "codeaura-cbfbe",
+    "staging": "codeaura-cbfbe"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }
